@@ -5,6 +5,7 @@ import proje2Gorsel from './assets/proje-2.svg';
 import Button from './components/Button';
 import Card from './components/Card';
 import Input from './components/Input';
+import Lab5Projects from './pages/Lab5Projects';
 import UIKit from './pages/UIKit';
 
 type FormValues = {
@@ -38,7 +39,7 @@ function validate(values: FormValues): FormErrors {
 }
 
 function App() {
-  const [page, setPage] = useState<'portfolio' | 'uikit'>('portfolio');
+  const [page, setPage] = useState<'portfolio' | 'uikit' | 'lab5'>('portfolio');
   const [values, setValues] = useState<FormValues>({
     name: '',
     email: '',
@@ -103,6 +104,33 @@ function App() {
     );
   }
 
+  if (page === 'lab5') {
+    return (
+      <>
+        <button
+          onClick={toggleDarkMode}
+          className="fixed top-4 right-4 z-50 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full shadow-lg hover:scale-110 transition-transform"
+          aria-label="Tema değiştir"
+          type="button"
+        >
+          <span className="dark:hidden">&#9790;</span>
+          <span className="hidden dark:inline">&#9728;</span>
+        </button>
+
+        <div className="fixed top-4 left-4 z-50 flex gap-2">
+          <Button variant="ghost" onClick={() => setPage('portfolio')}>
+            ← Portföy
+          </Button>
+          <Button variant="secondary" onClick={() => setPage('uikit')}>
+            UI Kit
+          </Button>
+        </div>
+
+        <Lab5Projects />
+      </>
+    );
+  }
+
   return (
     <>
       <button
@@ -162,6 +190,11 @@ function App() {
               <li>
                 <Button variant="secondary" size="sm" onClick={() => setPage('uikit')}>
                   UI Kit
+                </Button>
+              </li>
+              <li>
+                <Button variant="primary" size="sm" onClick={() => setPage('lab5')}>
+                  LAB-5
                 </Button>
               </li>
             </ul>
